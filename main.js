@@ -27,19 +27,26 @@ app.get('/main', function(req, res) {
 .post('/main/calc', function(req, res) {
 
   if (req.body.currA != '' && req.body.currB != '') {
+    fetch('https://api.fixer.io/latest?symbols='+req.body.currA+','+req.body.currB)
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(myJson) {
+      console.log(myJson);
+      let rateCurrA = myJson.rates[req.body.currA];
+      let rateCurrB = myJson.rates[req.body.currB];
+      console.log(rateCurrA,rateCurrB);
+      let rate = Math.round((rateCurrA/rateCurrB) * 10000) / 10000;
+      let result = Math.round((req.body.value * (rateCurrB/rateCurrA)) * 100) / 100;
+      console.log(rate,result);
 
-    passedParams= {value: req.body.value, currA: req.body.currA, currB: req.body.currB, rate: 1, result: 1};
-
-  /*fetch('https://api.fixer.io/latest?symbols='+'currA'+'currB')
-  .then(function(response) {
-    return response.json();
-  })
-  .then(function(myJson) {
-    console.log(myJson);
-  });*/
-
+      passedParams= {value: req.body.value, currA: req.body.currA,
+                    currB: req.body.currB,
+                    rate: rate,
+                    result: result};
+      res.redirect('/main');
+    });
 }
-  res.redirect('/main');
 })
 
 
