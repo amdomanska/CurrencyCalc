@@ -1,15 +1,43 @@
-var http = require("http");
+"use strict"
 
-http.createServer(function (request, response) {
+let express = require('express');
+let bodyParser = require('body-parser');
+let app = express();
 
-   // Send the HTTP header
-   // HTTP Status: 200 : OK
-   // Content Type: text/plain
-   response.writeHead(200, {'Content-Type': 'text/plain'});
+app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+  extended: true
+}))
+.use(function(req, res, next){
+    next();
+})
 
-   // Send the response body as "Hello World"
-   response.end('Hello World\n');
-}).listen(8081);
+app.get('/main', function(req, res) {
+  res.render('main.ejs');
+})
 
-// Console will print the message
-console.log('Server running at http://127.0.0.1:8081/');
+.post('/main', function(req, res) {
+  if (req.body.currA != '' && req.body.currB != '') {
+    let currA = req.body.currA;
+    let currB = req.body.currB;
+
+  fetch('https://api.fixer.io/latest?symbols='+'currA'+'currB')
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(myJson) {
+    console.log(myJson);
+  });
+
+  }
+  res.redirect('/main',{currA: req.body.currA,
+                        currB: req.body.currB,
+                        rate: 0,
+                        result: 0});
+})
+
+
+
+.use(function(req, res, next){
+    res.redirect('/main');
+})
+.listen(8080);
