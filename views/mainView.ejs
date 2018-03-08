@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title> CURRENCY CALCULOR </title>
+    <style>
+      a {text-decoration: none; color: black;}
+    </style>
+  </head>
+
+  <body>
+    <h1>Currency Calculator</h1>
+    <h2>thanks to api.fixer.io</h2>
+
+    <form action="/main/calc" method="post">
+      <p>
+        <input type="text" name="value" id="value" value = "<%= value === 0 ? "" : value %>" autofocus/>
+        <label for="currA">currency 1:</label>
+        <input type="text" name="currA" id="currA" value = "<%= currA === 0 ? "" : currA %>"/>
+        <label for="currB">currency 2:</label>
+        <input type="text" name="currB" id="currB" value = "<%= currB === 0 ? "" : currB %>"/>
+        <input type="submit" value="CALCULATE"/>
+      </p>
+      <p>
+        <label for="rate">rate: </label>
+        <input type="text" name="rate" id="rate" border="0" value = "<%= rate === 0 ? "" : rate %>"/>
+      </p>
+      <p>
+        <label for="result">result: </label>
+        <input type="text" name="result" id="result" border="0" value = "<%= result === 0 ? "" : rate %>"/>
+      </p>
+    </form>
+  </body>
+
+</html>
