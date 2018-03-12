@@ -19,7 +19,7 @@
               <option value= "<%= currA %>" selected="selected"><%= currA %></option>
             <% }}); %>
         </select>
-        =
+        <b> = </b>
         <input type="text" name="result" id="result" border="0" value = "<%= result === 0 ? "" : result %>" disabled style="font-weight: bold;"/>
         <select name="currB" id="currB">
           <% currList.forEach(function(v){ %>
@@ -31,7 +31,8 @@
         </select>
       </div>
       <div>
-        <label for="rate">rate: </label>
+        <label for="rate" disabled style="font-weight: bold;"> RATE: </label>
+        <br>
         <input type="text" name="rate" id="rate" border="0" value = "<%= rate === 0 ? "" : rate %>" disabled style="font-weight: bold;"/>
       </div>
       <div>
