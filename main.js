@@ -51,7 +51,7 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
       let rateCurrB = myJson.rates[req.body.currB];
       console.log(rateCurrA,rateCurrB);
 
-      let rate = Math.round((rateCurrA/rateCurrB) * 10000) / 10000;
+      let rate = Math.round((rateCurrB/rateCurrA) * 10000) / 10000;
       let result = Math.round((req.body.value * (rateCurrB/rateCurrA)) * 100) / 100;
       //console.log(rate,result);
 

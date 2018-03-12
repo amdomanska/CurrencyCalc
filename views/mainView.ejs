@@ -2,60 +2,46 @@
 
 <html>
   <head>
+    <link href="/style.css" rel="stylesheet" type="text/css">
     <title> CURRENCY CALCULOR </title>
-      <link href="/style.css" rel="stylesheet" type="text/css">
-       <link href="css/bootstrap.min.css" rel="stylesheet">
   </head>
-
   <body>
     <h1>Currency Calculator</h1>
-    <h2>thanks to api.fixer.io</h2>
 
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12 col-md-offset-3">
-          <div class="card card-block bg-faded">
-            <form action="/main/calc" method="post">
-                <div class="form-group">
-                  <input type="text" name="value" id="value" value = "<%= value === 0 ? "" : value %>" class="form-control" autofocus/>
-                </div>
-
-                <label for="currA">currency 1:</label>
-
-                <select name="currA" id="currA">
-                  <% currList.forEach(function(v){ %>
-                    <% if (v !== currA) {%>
-                      <option value= "<%= v %>" > <%= v %></option>
-                    <% } else { %>
-                      <option value= "<%= currA %>" selected="selected"><%= currA %></option>
-                    <% }}); %>
-                </select>
-
-                <label for="currB">currency 2:</label>
-
-                <select name="currB" id="currB">
-                  <% currList.forEach(function(v){ %>
-                    <% if (v !== currB) {%>
-                      <option value= "<%= v %>" > <%= v %></option>
-                    <% } else { %>
-                      <option value= "<%= currB %>" selected="selected"><%= currB %></option>
-                    <% }}); %>
-                </select>
-
-                <p>
-                  <label for="rate">rate: </label>
-                  <input type="text" name="rate" id="rate" border="0" value = "<%= rate === 0 ? "" : rate %>"/>
-                </p>
-                <p>
-                  <label for="result">result: </label>
-                  <input type="text" name="result" id="result" border="0" value = "<%= result === 0 ? "" : result %>"/>
-                </p>
-                <input type="submit" value="CALCULATE"/>
-              </form>
-            </div>
-          </div>
-        </div>
+    <form action="/main/calc" method="post">
+      <div>
+        <input type="text" name="value" id="value" value = "<%= value === 0 ? 1 : value %>" class="form-control" autofocus/>
+        <select name="currA" id="currA">
+          <% currList.forEach(function(v){ %>
+            <% if (v !== currA) {%>
+              <option value= "<%= v %>" > <%= v %></option>
+            <% } else { %>
+              <option value= "<%= currA %>" selected="selected"><%= currA %></option>
+            <% }}); %>
+        </select>
+        =
+        <input type="text" name="result" id="result" border="0" value = "<%= result === 0 ? "" : result %>" disabled style="font-weight: bold;"/>
+        <select name="currB" id="currB">
+          <% currList.forEach(function(v){ %>
+            <% if (v !== currB) {%>
+              <option value= "<%= v %>" > <%= v %></option>
+            <% } else { %>
+              <option value= "<%= currB %>" selected="selected"><%= currB %></option>
+            <% }}); %>
+        </select>
       </div>
+      <div>
+        <label for="rate">rate: </label>
+        <input type="text" name="rate" id="rate" border="0" value = "<%= rate === 0 ? "" : rate %>" disabled style="font-weight: bold;"/>
+      </div>
+      <div>
+        <input type="submit" value="CALCULATE" style="font-weight: bold;"/>
+      </div>
+    </form>
+
   </body>
 
+  <footer>
+    <h5>@ data received from api.fixer.io</h5>
+  </footer>
 </html>
