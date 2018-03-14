@@ -31,12 +31,10 @@ app.get('/main', function (req, res) {
   fetch('https://api.fixer.io/latest')
     .then(response => response.json())
     .then(myJson => {
-      let currList = Object.keys(myJson.rates)
-      res.render('mainView.ejs', {
-        currList: currList,
-        ...req.session.passedParams
+      let currList = Object.keys(myJson.rates);
+      res.render('mainView.ejs',
+        Object.assign({otherVal: x},req.session.passedParams));
       })
-    })
   })
 
   .post('/main/calc', function (req, res) {
