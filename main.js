@@ -33,22 +33,22 @@ app.get('/main', function (req, res) {
     .then(myJson => {
       let currList = Object.keys(myJson.rates);
       res.render('mainView.ejs',
-        Object.assign({otherVal: x},req.session.passedParams));
+        Object.assign({currList: currList},req.session.passedParams));
       })
   })
 
   .post('/main/calc', function (req, res) {
     if (req.body.currA != 0 && req.body.currB != 0) { // eslint-disable-line
-      fetch(`https://api.fixer.io/latest?symbols=${req.body.currA},$(req.body.currB)`)
+      fetch(`https://api.fixer.io/latest?symbols=${req.body.currA},${req.body.currB}`)
         .then(response => response.json())
         .then(myJson => {
-          // console.log(myJson);
+          console.log(myJson);
           let rateCurrA = myJson.rates[req.body.currA]
           let rateCurrB = myJson.rates[req.body.currB]
-          // console.log(rateCurrA,rateCurrB);
+          //console.log(rateCurrA,rateCurrB);
           let rate = Math.round((rateCurrB / rateCurrA) * 10000) / 10000
           let result = Math.round((req.body.value * (rateCurrB / rateCurrA)) * 100) / 100
-          // console.log(rate,result);
+          //console.log(rate,result);
 
           req.session.passedParams = {value: req.body.value,
             currA: req.body.currA,
