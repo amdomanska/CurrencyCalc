@@ -1,37 +1,40 @@
 {
   "name": "currencycalc",
   "version": "1.0.0",
-  "description": "currency calculater fetching data from api.fixer.io",
-  "main": "main.js",
+  "description": "To run application:",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "babel-node buildScripts/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amdomanska/CurrencyCalc.git"
+  },
+  "author": "Agnieszka Domanska",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/amdomanska/CurrencyCalc/issues"
+  },
+  "homepage": "https://github.com/amdomanska/CurrencyCalc#readme",
   "dependencies": {
-    "body-parser": "^1.18.2",
-    "bootstrap": "^3.3.7",
-    "ejs": "^2.5.7",
-    "express": "^4.16.2",
-    "express-session": "^1.15.6",
+    "express": "^4.15.2",
     "node-fetch": "^2.1.1",
     "path": "^0.12.7",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.4",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-react": "^6.24.1",
+    "babel-cli": "^6.24.0",
+    "babel-core": "^6.24.0",
+    "babel-loader": "^6.4.1",
+    "babel-preset-es2015": "^6.24.0",
+    "babel-preset-react": "^6.23.0",
     "babel-preset-react-hmre": "^1.1.1",
-    "babel-preset-stage-0": "^6.24.1",
-    "babel-preset-stage-2": "^6.24.1",
-    "eslint": "^4.18.2",
-    "eslint-config-standard": "^11.0.0",
-    "eslint-plugin-import": "^2.9.0",
-    "eslint-plugin-node": "^6.0.1",
-    "eslint-plugin-promise": "^3.7.0",
-    "eslint-plugin-standard": "^3.0.1",
+    "express-session": "^1.15.6",
     "open": "0.0.5",
-    "webpack-dev-middleware": "^3.0.1",
-    "webpack-dev-server": "^3.1.1"
+    "webpack": "^2.3.2",
+    "webpack-dev-middleware": "^1.10.1"
   },
   "babel": {
     "presets": [
@@ -43,20 +46,5 @@
         "react-hmre"
       ]
     }
-  },
-  "scripts": {
-    "start": "babel-node buildScripts/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": "git+https://github.com/amdomanska/CurrencyCalc.git",
-  "keywords": [
-    "node.js",
-    "promises"
-  ],
-  "author": "Agnieszka Domanska",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/amdomanska/CurrencyCalc/issues"
-  },
-  "homepage": "https://github.com/amdomanska/CurrencyCalc#readme"
+  }
 }
