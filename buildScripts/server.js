@@ -1,11 +1,20 @@
 'use strict'
 
-const fetch = require('node-fetch')
-const express = require('express')
-const bodyParser = require('body-parser')
-const session = require('express-session')
+import express from 'express';
+import path from 'path';
+import open from 'open';
+import fetch from 'node-fetch';
+import bodyParser from 'body-parser';
+import session from 'express-session';
 
-const app = express()
+import webpack from 'webpack';
+import config from '../webpack.config.dev';
+
+const compiler = webpack(config);
+
+const port = 3000;
+
+const app = express();
 
 app.use(bodyParser.urlencoded({ // to support URL-encoded bodies
   extended: true
@@ -16,20 +25,25 @@ app.use(bodyParser.urlencoded({ // to support URL-encoded bodies
   resave: false,
   saveUninitialized: true
 }))
+.use(require('webpack-dev-middleware')(compiler, {
+    noInfo: true,
+    publicPath: config.output.publicPath
+}));
 
 const zeroParams = () => ({value: 0, currA: 0, currB: 0, rate: 0, result: 0})
 
-app.get('/main', function (req, res) {
-  if (!req.session.passedParams) {
+app.get('/', function (req, res) {
+  res.sendFile(path.join(__dirname, '../src/index.html'));
+  /*if (!req.session.passedParams) {
     req.session.passedParams = zeroParams()
   }
   fetch('https://api.fixer.io/latest')
     .then(response => response.json())
     .then(myJson => {
       let currList = Object.keys(myJson.rates);
-      res.render('mainView.ejs',
+      res.render('src/mainView.ejs',
         Object.assign({currList: currList},req.session.passedParams));
-    });
+    }); */
   })
 
 .post('/main/calc', function (req, res) {
@@ -59,5 +73,11 @@ app.get('/main', function (req, res) {
 
 app.use(function (req, res, next) {
   res.redirect('/main')
-})
-.listen(8080)
+});
+app.listen(port, function (error) {
+  if(error) {
+      console.log(error);
+  } else {
+      open(`http://localhost:${port}`)
+  }
+});
