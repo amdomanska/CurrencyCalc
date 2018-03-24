@@ -1,17 +1,19 @@
 import webpack from 'webpack'
 import path from 'path'
 
+const DIST_DIR = path.resolve(__dirname, "dist");
+const SRC_DIR = path.resolve(__dirname, "src");
+
+
 export default {
   devtool: 'inline-source-map',
 
-  entry: [
-    path.resolve(__dirname, 'src/index.js')
-  ],
+  entry: SRC_DIR + "/app/index.js",
   target: 'web',
   output: {
-    path: path.resolve(__dirname, 'src'),
-    publicPath: '/',
-    filename: 'bundle.js'
+    path: DIST_DIR + "/app",
+        filename: "bundle.js",
+        publicPath: "/app/"
   },
   module: {
     loaders: [
